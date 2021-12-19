@@ -96,7 +96,8 @@ esac
 
 case "${MIRROR}" in
   "github")
-    MIRROR_URL="https://github.com/llvm/llvm-project/releases/download/llvmorg-${LLVM_VERSION}"
+    #MIRROR_URL="https://github.com/llvm/llvm-project/releases/download/llvmorg-${LLVM_VERSION}"
+    MIRROR_URL="https://mirrors.tuna.tsinghua.edu.cn/github-release/llvm/llvm-project/LLVM%20${LLVM_VERSION}"
     ;;
   "llvm")
     MIRROR_URL="http://releases.llvm.org/${LLVM_VERSION}"
@@ -114,8 +115,8 @@ DOWNLOAD_FILE="llvm.${DOWNLOAD_TYPE}"
 
 # Download
 echo "Downloading ${DOWNLOAD}"
-wget -nv -O "${DOWNLOAD_FILE}"     "${MIRROR_URL}/${DOWNLOAD}"
-wget -nv -O "${DOWNLOAD_FILE}.sig" "${MIRROR_URL}/${DOWNLOAD}.sig"
+curl -o "${DOWNLOAD_FILE}"     "${MIRROR_URL}/${DOWNLOAD}"
+curl -o "${DOWNLOAD_FILE}.sig" "${MIRROR_URL}/${DOWNLOAD}.sig"
 
 # Verify
 gpg --batch --verify "${DOWNLOAD_FILE}.sig" "${DOWNLOAD_FILE}"
